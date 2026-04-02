@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh repo theArkein/hanuman-chalisa*)",
+      "Bash(gh pr create --repo theArkein/hanuman-chalisa*)",
+      "Bash(gh pr list --repo theArkein/hanuman-chalisa*)",
+      "Bash(gh pr view --repo theArkein/hanuman-chalisa*)",
+      "Bash(gh pr merge --repo theArkein/hanuman-chalisa*)",
+      "Bash(gh issue create --repo theArkein/hanuman-chalisa*)",
+      "Bash(gh issue list --repo theArkein/hanuman-chalisa*)",
+      "Bash(gh release create --repo theArkein/hanuman-chalisa*)",
+      "Bash(gh release list --repo theArkein/hanuman-chalisa*)",
+      "Bash(git*)",
+      "Read",
+      "Write"
+    ]
+  }
+}
