@@ -378,11 +378,16 @@ const ch=[
 "जो यह पढ़ै हनुमान चालीसा।\nहोय सिद्धि साखी गौरीसा॥",
 "तुलसीदास सदा हरि चेरा।\nकीजै नाथ हृदय महँ डेरा॥"
 ];
+const chm=[
+//CHM
+];
 function render(a,id,s){
   const c=document.getElementById(id);
   a.forEach((t,i)=>{
+    const [l1,l2]=t.split('\n');const m=chm[s-1+i];
     const d=document.createElement('div');d.className='ch';
-    d.innerHTML=`<span class="ch-n">${String(s+i).padStart(2,'0')}</span><div class="v">${t.replace(/\n/g,'<br>')}</div>`;
+    if(m){d.innerHTML=`<span class="ch-n">${String(s+i).padStart(2,'0')}</span><div class="v">${l1}</div><div class="v-meaning"><span class="m-hi">${m.hi1}</span><span class="m-en" hidden>${m.en1}</span></div><div class="v" style="margin-top:6px">${l2}</div><div class="v-meaning"><span class="m-hi">${m.hi2}</span><span class="m-en" hidden>${m.en2}</span></div>`;}
+    else{d.innerHTML=`<span class="ch-n">${String(s+i).padStart(2,'0')}</span><div class="v">${t.replace(/\n/g,'<br>')}</div>`;}
     c.appendChild(d);
   });
 }
