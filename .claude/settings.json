@@ -23,7 +23,8 @@
       "Bash(git pull origin*)",
       "Bash(git fetch origin*)",
       "Read",
-      "Write"
+      "Write",
+      "Edit"
     ]
   }
 }
