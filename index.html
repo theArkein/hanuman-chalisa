@@ -6,6 +6,7 @@
 <title>Hanuman Chalisa</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Cormorant+Garamond:wght@300;400;500;600&display=swap');
+  :root{--fs-v:22px;--fs-meaning:13px}
   *{margin:0;padding:0;box-sizing:border-box}
   body{min-height:100vh;background:#faf6f1;color:#3a2e25;font-family:'Tiro Devanagari Hindi',serif;overflow-x:hidden}
 
@@ -51,16 +52,16 @@
   .sec-label{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#c45e20;text-align:center;margin-bottom:20px;opacity:.75}
   .doha{background:rgba(255,255,255,.6);border:1px solid rgba(196,94,32,.1);border-radius:16px;padding:32px 28px;text-align:center;backdrop-filter:blur(10px);box-shadow:0 4px 20px rgba(60,40,20,.04);transition:border-color .3s}
   .doha:hover{border-color:rgba(196,94,32,.2)}
-  .v{font-size:22px;line-height:1.9;color:#3a2e25}
-  .v-meaning{font-family:'Cormorant Garamond',serif;font-size:13px;color:#a07850;font-style:italic;line-height:1.5;margin-top:2px;padding-left:2px}
+  .v{font-size:var(--fs-v);line-height:1.9;color:#3a2e25}
+  .v-meaning{font-family:'Cormorant Garamond',serif;font-size:var(--fs-meaning);color:#a07850;font-style:italic;line-height:1.5;margin-top:2px;padding-left:2px}
   .meaning-btn{background:none;border:none;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:2px;color:#c45e20;opacity:.55;cursor:pointer;padding:4px 0;transition:opacity .2s}
   .meaning-btn:hover{opacity:1}
-  .meaning-overall{font-family:'Cormorant Garamond',serif;font-size:13px;color:#7a5c3e;font-style:italic;line-height:1.75;margin-top:10px;padding-top:10px;border-top:1px solid rgba(196,94,32,.1);text-align:left}
+  .meaning-overall{font-family:'Cormorant Garamond',serif;font-size:var(--fs-meaning);color:#7a5c3e;font-style:italic;line-height:1.75;margin-top:10px;padding-top:10px;border-top:1px solid rgba(196,94,32,.1);text-align:left}
   .cg{display:grid;gap:24px}
   .ch{position:relative;padding:24px 28px;background:rgba(255,255,255,.4);border-left:2px solid rgba(196,94,32,.15);border-radius:0 12px 12px 0;transition:all .3s ease}
   .ch:hover{background:rgba(255,255,255,.7);border-left-color:rgba(196,94,32,.5);transform:translateX(4px);box-shadow:0 4px 20px rgba(60,40,20,.06)}
   .ch-n{position:absolute;top:-10px;left:16px;font-family:'Cormorant Garamond',serif;font-size:10px;letter-spacing:2px;color:#c45e20;opacity:.5}
-  .ch .v{font-size:20px;text-align:left;line-height:1.9}
+  .ch .v{font-size:calc(var(--fs-v) - 2px);text-align:left;line-height:1.9}
 
   .ft{text-align:center;padding:40px 0 20px}
   .ft-jai{font-size:28px;color:#c45e20;margin:16px 0}
@@ -84,7 +85,7 @@
     transition:max-width .3s ease,opacity .15s ease
   }
   .scroller:hover .scroller-controls{
-    max-width:220px;opacity:1;
+    max-width:270px;opacity:1;
     transition:max-width .3s ease,opacity .25s ease .1s
   }
   .scroller-btn{
@@ -114,19 +115,21 @@
   .lang-toggle{display:flex;gap:3px;align-items:center}
   .lang-btn{background:none;border:1px solid rgba(196,94,32,.2);border-radius:10px;font-family:'Cormorant Garamond',serif;font-size:11px;color:#c45e20;padding:2px 6px;cursor:pointer;transition:all .2s;opacity:.6;line-height:1}
   .lang-btn.active{background:#c45e20;color:#fff;border-color:#c45e20;opacity:1}
+  .font-toggle{display:flex;gap:3px;align-items:center}
+  .font-btn{background:none;border:1px solid rgba(196,94,32,.2);border-radius:10px;font-family:'Cormorant Garamond',serif;color:#c45e20;padding:2px 6px;cursor:pointer;transition:all .2s;opacity:.6;line-height:1}
+  .font-btn:hover{opacity:1;border-color:#c45e20}
 
   /* touch devices: use .expanded class, neutralize sticky :hover */
   @media(hover:none){
     .scroller:hover{padding:8px;gap:0}
     .scroller:hover .scroller-controls{max-width:0;opacity:0}
     .scroller.expanded{padding:8px 14px;gap:10px}
-    .scroller.expanded .scroller-controls{max-width:220px;opacity:1}
+    .scroller.expanded .scroller-controls{max-width:270px;opacity:1}
   }
 
   @media(max-width:600px){
+    :root{--fs-v:18px;--fs-meaning:12px}
     .hero h1{font-size:36px}
-    .v{font-size:18px}
-    .ch .v{font-size:17px}
     .wrap{padding:0 16px 60px}
     .doha{padding:24px 18px}
     .ch{padding:20px 18px}
@@ -233,6 +236,11 @@
       <button class="lang-btn active" data-lang="hi" onclick="setLang('hi')">हि</button>
       <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
     </div>
+    <div class="scroller-divider"></div>
+    <div class="font-toggle">
+      <button class="font-btn" onclick="changeFontSize(-1)" title="Decrease font size">A−</button>
+      <button class="font-btn" onclick="changeFontSize(1)" title="Increase font size">A+</button>
+    </div>
   </div>
 </div>
 
@@ -257,6 +265,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+// === FONT SIZE ===
+const fsV = [18,20,22,24,26,28,30];
+const fsMeaning = [11,12,13,14,15,16,17];
+let fsIdx = 2; // default: 22px / 13px
+function changeFontSize(dir) {
+  fsIdx = Math.max(0, Math.min(fsV.length - 1, fsIdx + dir));
+  const r = document.documentElement.style;
+  r.setProperty('--fs-v', fsV[fsIdx] + 'px');
+  r.setProperty('--fs-meaning', fsMeaning[fsIdx] + 'px');
+}
 
 // === LANGUAGE TOGGLE ===
 function setLang(l) {
