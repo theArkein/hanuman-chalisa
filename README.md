@@ -2,6 +2,8 @@
 
 A clean, beautiful, and simple single-page website for reading the Hanuman Chalisa — the 40-verse devotional hymn by Goswami Tulsidas.
 
+**Live site:** [हनुमान चालीसा](https://thearkein.github.io/hanuman-chalisa/)
+
 ## Features
 
 - Full text of all 40 chaupais + opening and closing dohas in Devanagari
