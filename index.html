@@ -36,6 +36,8 @@
 <link rel="alternate" hreflang="en" href="https://thearkein.github.io/hanuman-chalisa/">
 <link rel="alternate" hreflang="x-default" href="https://thearkein.github.io/hanuman-chalisa/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚩</text></svg>">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
 <link rel="preload" as="image" href="https://i.imgur.com/KQCDDXr.png" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -517,6 +519,14 @@ document.querySelectorAll('.ch,.doha,.img-card,.circle-img').forEach(el=>{
   el.style.transition='opacity .6s ease,transform .6s ease';
   obs.observe(el);
 });
+
+// === SERVICE WORKER (PWA) ===
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('/hanuman-chalisa/sw.js',{scope:'/hanuman-chalisa/'})
+      .catch(()=>{});
+  });
+}
 </script>
 </body>
 </html>
