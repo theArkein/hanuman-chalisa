@@ -1,5 +1,16 @@
 # In-Progress Tasks
 
+<!--
+## Task Title
+**Status:** Pending | In Progress | Waiting | Done
+
+### Steps
+- [ ] 1. Step one
+  > Note: any relevant detail about this step
+- [ ] 2. Step two
+  > Note: any relevant detail about this step
+-->
+
 ## Google Search Console — Sitemap Submission
 **Status:** Waiting (sitemap fetch failed; indexing requested directly)
 
