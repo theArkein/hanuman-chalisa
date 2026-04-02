@@ -118,7 +118,7 @@
 <!-- HERO -->
 <div class="hero">
   <div class="hero-bg">
-    <img data-slot="1" alt="Hanuman Ji" />
+    <img data-slot="1" alt="Hanuman Ji" referrerpolicy="no-referrer" />
   </div>
   <div class="hero-content">
     <div class="om">ॐ</div>
@@ -145,7 +145,7 @@
 
   <!-- Image 2 — full figure card -->
   <div class="img-card">
-    <img data-slot="2" alt="Hanuman Ji" />
+    <img data-slot="2" alt="Hanuman Ji" referrerpolicy="no-referrer" />
     <div class="cap">॥ राम लखन सीता मन बसिया ॥</div>
   </div>
 
@@ -156,7 +156,7 @@
   <!-- Image 3 — circle, head visible -->
   <div style="text-align:center">
     <div class="circle-img">
-      <img data-slot="3" alt="Hanuman Ji" />
+      <img data-slot="3" alt="Hanuman Ji" referrerpolicy="no-referrer" />
     </div>
   </div>
 
@@ -194,15 +194,18 @@ const slots = {
   2: ['https://i.imgur.com/Sg88YK3.png','https://i.imgur.com/Sg88YK3.jpg','https://i.imgur.com/Sg88YK3.jpeg','https://i.imgur.com/Sg88YK3.webp'],
   3: ['https://i.imgur.com/AH2ucno.png','https://i.imgur.com/AH2ucno.jpg','https://i.imgur.com/AH2ucno.jpeg','https://i.imgur.com/AH2ucno.webp']
 };
-Object.entries(slots).forEach(([slot, urls]) => {
-  let done = false;
-  urls.forEach(url => {
-    const img = new Image();
-    img.onload = () => {
-      if (done) return; done = true;
-      document.querySelectorAll(`[data-slot="${slot}"]`).forEach(el => { el.src = url; });
-    };
-    img.src = url;
+document.addEventListener('DOMContentLoaded', () => {
+  Object.entries(slots).forEach(([slot, urls]) => {
+    let done = false;
+    urls.forEach(url => {
+      const img = new Image();
+      img.referrerPolicy = 'no-referrer';
+      img.onload = () => {
+        if (done) return; done = true;
+        document.querySelectorAll(`[data-slot="${slot}"]`).forEach(el => { el.src = url; });
+      };
+      img.src = url;
+    });
   });
 });
 
