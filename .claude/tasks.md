@@ -24,3 +24,12 @@
   *(Previous attempt showed "couldn't fetch" — retry after 24 hours)*
 - [x] 4. URL Inspection → enter `https://thearkein.github.io/hanuman-chalisa/` → Request Indexing
   *(Requested — verify indexing status in 1–2 weeks via URL Inspection)*
+
+## Open Graph Metadata — Verify & Fix Issues
+**Status:** Pending
+
+### Steps
+- [ ] 1. Go to [opengraph.xyz](https://www.opengraph.xyz)
+- [ ] 2. Submit `https://thearkein.github.io/hanuman-chalisa/`
+- [ ] 3. Note any issues reported (missing tags, wrong image dimensions, truncated description, etc.)
+- [ ] 4. Fix reported issues in `index.html` and commit + push
