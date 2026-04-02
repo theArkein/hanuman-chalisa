@@ -51,7 +51,11 @@
   .sec-label{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#c45e20;text-align:center;margin-bottom:20px;opacity:.75}
   .doha{background:rgba(255,255,255,.6);border:1px solid rgba(196,94,32,.1);border-radius:16px;padding:32px 28px;text-align:center;backdrop-filter:blur(10px);box-shadow:0 4px 20px rgba(60,40,20,.04);transition:border-color .3s}
   .doha:hover{border-color:rgba(196,94,32,.2)}
-  .v{font-size:22px;line-height:2;color:#3a2e25}
+  .v{font-size:22px;line-height:1.9;color:#3a2e25}
+  .v-meaning{font-family:'Cormorant Garamond',serif;font-size:13px;color:#a07850;font-style:italic;line-height:1.5;margin-top:2px;padding-left:2px}
+  .meaning-btn{background:none;border:none;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:2px;color:#c45e20;opacity:.55;cursor:pointer;padding:4px 0;transition:opacity .2s}
+  .meaning-btn:hover{opacity:1}
+  .meaning-overall{font-family:'Cormorant Garamond',serif;font-size:13px;color:#7a5c3e;font-style:italic;line-height:1.75;margin-top:10px;padding-top:10px;border-top:1px solid rgba(196,94,32,.1);text-align:left}
   .cg{display:grid;gap:24px}
   .ch{position:relative;padding:24px 28px;background:rgba(255,255,255,.4);border-left:2px solid rgba(196,94,32,.15);border-radius:0 12px 12px 0;transition:all .3s ease}
   .ch:hover{background:rgba(255,255,255,.7);border-left-color:rgba(196,94,32,.5);transform:translateX(4px);box-shadow:0 4px 20px rgba(60,40,20,.06)}
@@ -151,8 +155,24 @@
   <div class="sec" style="padding-top:40px">
     <div class="sec-label">॥ दोहा ॥</div>
     <div class="doha">
-      <div class="v">श्रीगुरु चरन सरोज रज, निज मनु मुकुरु सुधारि।<br>बरनऊँ रघुबर बिमल जसु, जो दायकु फल चारि॥</div>
-      <div class="v" style="margin-top:16px">बुद्धिहीन तनु जानिके, सुमिरौं पवन-कुमार।<br>बल बुद्धि बिद्या देहु मोहिं, हरहु कलेस बिकार॥</div>
+      <div class="v-block">
+        <div class="v">श्रीगुरु चरन सरोज रज, निज मनु मुकुरु सुधारि।</div>
+        <div class="v-meaning">Cleansing the mirror of my mind with the dust of the lotus feet of my Guru…</div>
+        <div class="v" style="margin-top:6px">बरनऊँ रघुबर बिमल जसु, जो दायकु फल चारि॥</div>
+        <div class="v-meaning">…I sing the pure glory of Lord Rama, bestower of the four fruits of life.</div>
+      </div>
+      <div class="v-block" style="margin-top:20px">
+        <div class="v">बुद्धिहीन तनु जानिके, सुमिरौं पवन-कुमार।</div>
+        <div class="v-meaning">Knowing myself to be without wisdom, I invoke Hanuman, Son of the Wind…</div>
+        <div class="v" style="margin-top:6px">बल बुद्धि बिद्या देहु मोहिं, हरहु कलेस बिकार॥</div>
+        <div class="v-meaning">…Grant me strength, wisdom and knowledge; remove my afflictions and impurities.</div>
+      </div>
+      <div style="text-align:right;margin-top:14px">
+        <button class="meaning-btn" onclick="toggleMeaning(this)">॥ overall meaning ॥</button>
+      </div>
+      <div class="meaning-overall" style="display:none">
+        These two Dohas are the invocation (mangalacharana) — Tulsidas first purifies his mind through the Guru's grace, then humbly acknowledges his own limitations and asks Hanuman for the capacity to sing his glory.
+      </div>
     </div>
   </div>
 
@@ -228,6 +248,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+// === MEANING TOGGLE ===
+function toggleMeaning(btn) {
+  const el = btn.parentElement.nextElementSibling;
+  const show = el.style.display === 'none';
+  el.style.display = show ? 'block' : 'none';
+  btn.textContent = show ? '॥ hide ॥' : '॥ overall meaning ॥';
+}
 
 // === AUTO-SCROLL ===
 const speeds = [0.25,0.5,0.75,1,1.25,1.5,1.75,2,2.25,2.5,2.75,3,3.25,3.5,3.75,4];
