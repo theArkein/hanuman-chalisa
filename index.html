@@ -68,13 +68,21 @@
     position:fixed;bottom:20px;right:20px;z-index:200;
     background:rgba(255,255,255,.88);backdrop-filter:blur(12px);
     border:1px solid rgba(196,94,32,.12);border-radius:28px;
-    padding:8px 14px;box-shadow:0 4px 16px rgba(60,40,20,.08);
+    padding:8px;box-shadow:0 4px 16px rgba(60,40,20,.08);
     font-family:'Cormorant Garamond',serif;
-    display:flex;align-items:center;gap:10px;
-    transition:opacity .4s,transform .4s;
-    opacity:1;transform:translateY(0)
+    display:flex;align-items:center;gap:0;
+    transition:padding .3s ease,gap .3s ease
   }
-  .scroller.hidden{opacity:0;transform:translateY(20px);pointer-events:none}
+  .scroller:hover{padding:8px 14px;gap:10px}
+  .scroller-controls{
+    display:flex;align-items:center;gap:10px;
+    overflow:hidden;max-width:0;opacity:0;
+    transition:max-width .3s ease,opacity .15s ease
+  }
+  .scroller:hover .scroller-controls{
+    max-width:160px;opacity:1;
+    transition:max-width .3s ease,opacity .25s ease .1s
+  }
   .scroller-btn{
     width:32px;height:32px;border-radius:50%;border:1.5px solid rgba(196,94,32,.2);
     background:rgba(255,255,255,.8);color:#c45e20;font-size:13px;
@@ -83,7 +91,9 @@
   }
   .scroller-btn:hover{background:#c45e20;color:#fff;border-color:#c45e20}
   .scroller-btn.active{background:#c45e20;color:#fff;border-color:#c45e20}
+  .scroller-speed{display:flex;align-items:center}
   .scroller-speed input[type=range]{
+    display:block;margin:0;
     width:80px;-webkit-appearance:none;appearance:none;height:3px;
     background:linear-gradient(90deg,#e9c46a,#c45e20);border-radius:2px;outline:none;cursor:pointer
   }
@@ -97,6 +107,14 @@
   }
   .speed-val{font-size:11px;color:#c45e20;font-weight:600;min-width:30px;text-align:center}
 
+  /* touch devices: use .expanded class, neutralize sticky :hover */
+  @media(hover:none){
+    .scroller:hover{padding:8px;gap:0}
+    .scroller:hover .scroller-controls{max-width:0;opacity:0}
+    .scroller.expanded{padding:8px 14px;gap:10px}
+    .scroller.expanded .scroller-controls{max-width:160px;opacity:1}
+  }
+
   @media(max-width:600px){
     .hero h1{font-size:36px}
     .v{font-size:18px}
@@ -106,7 +124,7 @@
     .ch{padding:20px 18px}
     .img-card{margin:40px -16px;border-radius:14px}
     .circle-img{width:240px;height:240px}
-    .scroller{bottom:16px;right:16px;padding:12px 14px;min-width:140px}
+    .scroller{bottom:16px;right:16px}
   }
 </style>
 </head>
@@ -179,12 +197,14 @@
 </div>
 
 <!-- AUTO-SCROLL WIDGET -->
-<div class="scroller hidden" id="scroller">
+<div class="scroller" id="scroller">
   <button class="scroller-btn" id="scrollBtn" onclick="toggleScroll()" title="Play / Pause">▶</button>
-  <div class="scroller-speed">
-    <input type="range" id="speedRange" min="1" max="16" value="4" step="1" oninput="updateSpeed(this.value)">
+  <div class="scroller-controls">
+    <div class="scroller-speed">
+      <input type="range" id="speedRange" min="1" max="16" value="4" step="1" oninput="updateSpeed(this.value)">
+    </div>
+    <div class="speed-val" id="speedVal">1×</div>
   </div>
-  <div class="speed-val" id="speedVal">1×</div>
 </div>
 
 <script>
@@ -211,22 +231,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // === AUTO-SCROLL ===
 const speeds = [0.25,0.5,0.75,1,1.25,1.5,1.75,2,2.25,2.5,2.75,3,3.25,3.5,3.75,4];
-let scrolling = false, speed = speeds[3], raf = null, hideTimer = null;
+let scrolling = false, speed = speeds[3], raf = null;
 const scr = document.getElementById('scroller');
+const touchOnly = window.matchMedia('(hover:none)').matches;
 
-function showWidget() {
-  scr.classList.remove('hidden');
-  clearTimeout(hideTimer);
-  if (!scrolling) hideTimer = setTimeout(() => { if (!scrolling) scr.classList.add('hidden'); }, 3000);
+// touch: collapse widget on outside tap
+if (touchOnly) {
+  document.addEventListener('click', e => {
+    if (!scr.contains(e.target)) scr.classList.remove('expanded');
+  });
 }
+
 function toggleScroll() {
+  // touch: first tap expands; subsequent taps toggle scroll
+  if (touchOnly && !scr.classList.contains('expanded')) {
+    scr.classList.add('expanded');
+    return;
+  }
   scrolling = !scrolling;
   const btn = document.getElementById('scrollBtn');
   btn.textContent = scrolling ? '⏸' : '▶';
   btn.classList.toggle('active', scrolling);
-  clearTimeout(hideTimer);
-  if (scrolling) { doScroll(); scr.classList.remove('hidden'); }
-  else hideTimer = setTimeout(() => scr.classList.add('hidden'), 3000);
+  if (scrolling) doScroll();
 }
 function doScroll() {
   if (!scrolling) return;
@@ -234,21 +260,17 @@ function doScroll() {
   const h = document.documentElement;
   if (h.scrollTop + h.clientHeight >= h.scrollHeight - 2) {
     scrolling = false;
-    document.getElementById('scrollBtn').textContent = '▶';
-    document.getElementById('scrollBtn').classList.remove('active');
-    hideTimer = setTimeout(() => scr.classList.add('hidden'), 3000);
+    const btn = document.getElementById('scrollBtn');
+    btn.textContent = '▶';
+    btn.classList.remove('active');
     return;
   }
   raf = requestAnimationFrame(doScroll);
 }
 function updateSpeed(v) {
-  const idx = parseInt(v) - 1;
-  speed = speeds[idx];
+  speed = speeds[parseInt(v) - 1];
   document.getElementById('speedVal').textContent = speed + '×';
-  showWidget();
 }
-// Show on any scroll/touch, auto-hide after 3s idle
-['scroll','mousemove','touchstart'].forEach(e => window.addEventListener(e, showWidget, {passive:true}));
 
 // === CHAUPAIS ===
 const ch=[
