@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hanuman Chalisa</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Cormorant+Garamond:wght@300;400;500;600&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{min-height:100vh;background:#faf6f1;color:#3a2e25;font-family:'Tiro Devanagari Hindi',serif;overflow-x:hidden}
+
+  .orb{position:fixed;border-radius:50%;filter:blur(100px);opacity:.15;animation:fl 20s ease-in-out infinite;pointer-events:none}
+  .o1{width:500px;height:500px;background:radial-gradient(circle,#f4a261,#e9c46a);top:-120px;left:-120px}
+  .o2{width:400px;height:400px;background:radial-gradient(circle,#e76f51,#f4a261);bottom:-80px;right:-120px;animation-delay:-7s}
+  .o3{width:300px;height:300px;background:radial-gradient(circle,#e9c46a,#f4a261);top:40%;left:50%;animation-delay:-14s}
+  @keyframes fl{0%,100%{transform:translate(0,0)scale(1)}33%{transform:translate(30px,-40px)scale(1.05)}66%{transform:translate(-20px,30px)scale(.95)}}
+
+  .pat{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23c4956a'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+
+  .wrap{position:relative;z-index:2;max-width:720px;margin:0 auto;padding:0 24px 80px}
+
+  /* HERO */
+  .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding-bottom:60px;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:0}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 15%;filter:brightness(.92)saturate(1.05)}
+  .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#faf6f1 0%,rgba(250,246,241,.65) 35%,rgba(250,246,241,.1) 65%,rgba(250,246,241,.3) 100%)}
+  .hero-content{position:relative;z-index:1}
+  .hero .om{font-size:42px;color:#c45e20;text-shadow:0 0 40px rgba(196,94,32,.25);animation:glow 3s ease-in-out infinite alternate;margin-bottom:8px}
+  @keyframes glow{from{text-shadow:0 0 25px rgba(196,94,32,.15)}to{text-shadow:0 0 50px rgba(196,94,32,.35)}}
+  .hero .pre{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:6px;text-transform:uppercase;color:#a07850;margin-bottom:4px}
+  .hero h1{font-size:52px;font-weight:400;line-height:1.3;margin-bottom:6px;color:#3a2e25;text-shadow:0 1px 10px rgba(250,246,241,.6)}
+  .hero .sub{font-family:'Cormorant Garamond',serif;font-size:15px;color:#8a7560;letter-spacing:2px}
+  .scroll-hint{margin-top:32px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#b09a80;animation:bob 2s ease-in-out infinite}
+  .scroll-hint::after{content:'';display:block;width:1px;height:28px;background:linear-gradient(to bottom,#b09a80,transparent);margin:8px auto 0}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+  .div{width:60px;height:1px;background:linear-gradient(90deg,transparent,#c45e20,transparent);margin:30px auto}
+
+  /* IMAGE CARD — compact mid-read break */
+  .img-card{position:relative;margin:48px auto;overflow:hidden;border-radius:18px;border:1px solid rgba(196,94,32,.1);box-shadow:0 6px 28px rgba(60,40,20,.07);max-width:360px}
+  .img-card img{width:100%;display:block;max-height:320px;object-fit:cover;object-position:center 10%;filter:saturate(1.05)}
+  .img-card::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(250,246,241,.75) 0%,transparent 30%);pointer-events:none}
+  .img-card .cap{position:absolute;bottom:16px;left:0;right:0;text-align:center;z-index:1;font-family:'Cormorant Garamond',serif;font-size:13px;color:#7a5c3e;letter-spacing:2px;font-style:italic}
+
+  /* CIRCLE — show head properly */
+  .circle-img{margin:56px auto;width:280px;height:280px;border-radius:50%;overflow:hidden;border:2px solid rgba(196,94,32,.15);box-shadow:0 0 50px rgba(196,94,32,.08),0 8px 30px rgba(60,40,20,.1)}
+  .circle-img img{width:100%;height:100%;object-fit:cover;object-position:center 10%}
+
+  /* SECTIONS */
+  .sec{margin-bottom:48px}
+  .sec-label{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#c45e20;text-align:center;margin-bottom:20px;opacity:.75}
+  .doha{background:rgba(255,255,255,.6);border:1px solid rgba(196,94,32,.1);border-radius:16px;padding:32px 28px;text-align:center;backdrop-filter:blur(10px);box-shadow:0 4px 20px rgba(60,40,20,.04);transition:border-color .3s}
+  .doha:hover{border-color:rgba(196,94,32,.2)}
+  .v{font-size:22px;line-height:2;color:#3a2e25}
+  .cg{display:grid;gap:24px}
+  .ch{position:relative;padding:24px 28px;background:rgba(255,255,255,.4);border-left:2px solid rgba(196,94,32,.15);border-radius:0 12px 12px 0;transition:all .3s ease}
+  .ch:hover{background:rgba(255,255,255,.7);border-left-color:rgba(196,94,32,.5);transform:translateX(4px);box-shadow:0 4px 20px rgba(60,40,20,.06)}
+  .ch-n{position:absolute;top:-10px;left:16px;font-family:'Cormorant Garamond',serif;font-size:10px;letter-spacing:2px;color:#c45e20;opacity:.5}
+  .ch .v{font-size:20px;text-align:left;line-height:1.9}
+
+  .ft{text-align:center;padding:40px 0 20px}
+  .ft-jai{font-size:28px;color:#c45e20;margin:16px 0}
+  .ft-end{font-family:'Cormorant Garamond',serif;font-size:12px;color:#b09a80;letter-spacing:3px;margin-top:12px}
+  .prog{position:fixed;top:0;left:0;height:2px;z-index:100;background:linear-gradient(90deg,#e76f51,#f4a261);box-shadow:0 0 8px rgba(231,111,81,.3)}
+
+  /* ===== AUTO-SCROLL WIDGET ===== */
+  .scroller{
+    position:fixed;bottom:20px;right:20px;z-index:200;
+    background:rgba(255,255,255,.88);backdrop-filter:blur(12px);
+    border:1px solid rgba(196,94,32,.12);border-radius:28px;
+    padding:8px 14px;box-shadow:0 4px 16px rgba(60,40,20,.08);
+    font-family:'Cormorant Garamond',serif;
+    display:flex;align-items:center;gap:10px;
+    transition:opacity .4s,transform .4s;
+    opacity:1;transform:translateY(0)
+  }
+  .scroller.hidden{opacity:0;transform:translateY(20px);pointer-events:none}
+  .scroller-btn{
+    width:32px;height:32px;border-radius:50%;border:1.5px solid rgba(196,94,32,.2);
+    background:rgba(255,255,255,.8);color:#c45e20;font-size:13px;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:all .2s;flex-shrink:0
+  }
+  .scroller-btn:hover{background:#c45e20;color:#fff;border-color:#c45e20}
+  .scroller-btn.active{background:#c45e20;color:#fff;border-color:#c45e20}
+  .scroller-speed input[type=range]{
+    width:80px;-webkit-appearance:none;appearance:none;height:3px;
+    background:linear-gradient(90deg,#e9c46a,#c45e20);border-radius:2px;outline:none;cursor:pointer
+  }
+  .scroller-speed input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;width:14px;height:14px;border-radius:50%;
+    background:#c45e20;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:pointer
+  }
+  .scroller-speed input[type=range]::-moz-range-thumb{
+    width:14px;height:14px;border-radius:50%;
+    background:#c45e20;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:pointer
+  }
+  .speed-val{font-size:11px;color:#c45e20;font-weight:600;min-width:30px;text-align:center}
+
+  @media(max-width:600px){
+    .hero h1{font-size:36px}
+    .v{font-size:18px}
+    .ch .v{font-size:17px}
+    .wrap{padding:0 16px 60px}
+    .doha{padding:24px 18px}
+    .ch{padding:20px 18px}
+    .img-card{margin:40px -16px;border-radius:14px}
+    .circle-img{width:240px;height:240px}
+    .scroller{bottom:16px;right:16px;padding:12px 14px;min-width:140px}
+  }
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+<div class="pat"></div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg">
+    <img data-slot="1" alt="Hanuman Ji" />
+  </div>
+  <div class="hero-content">
+    <div class="om">ॐ</div>
+    <div class="pre">श्री</div>
+    <h1>हनुमान चालीसा</h1>
+    <div class="sub">by Goswami Tulsidas</div>
+    <div class="scroll-hint">Scroll<div></div></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="sec" style="padding-top:40px">
+    <div class="sec-label">॥ दोहा ॥</div>
+    <div class="doha">
+      <div class="v">श्रीगुरु चरन सरोज रज, निज मनु मुकुरु सुधारि।<br>बरनऊँ रघुबर बिमल जसु, जो दायकु फल चारि॥</div>
+      <div class="v" style="margin-top:16px">बुद्धिहीन तनु जानिके, सुमिरौं पवन-कुमार।<br>बल बुद्धि बिद्या देहु मोहिं, हरहु कलेस बिकार॥</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-label">॥ चौपाई ॥</div>
+    <div class="cg" id="c1"></div>
+  </div>
+
+  <!-- Image 2 — full figure card -->
+  <div class="img-card">
+    <img data-slot="2" alt="Hanuman Ji" />
+    <div class="cap">॥ राम लखन सीता मन बसिया ॥</div>
+  </div>
+
+  <div class="sec">
+    <div class="cg" id="c2"></div>
+  </div>
+
+  <!-- Image 3 — circle, head visible -->
+  <div style="text-align:center">
+    <div class="circle-img">
+      <img data-slot="3" alt="Hanuman Ji" />
+    </div>
+  </div>
+
+  <div class="sec" style="margin-top:48px">
+    <div class="cg" id="c3"></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-label">॥ दोहा ॥</div>
+    <div class="doha">
+      <div class="v">पवनतनय संकट हरन, मंगल मूरति रूप।<br>राम लखन सीता सहित, हृदय बसहु सुर भूप॥</div>
+    </div>
+  </div>
+
+  <div class="ft">
+    <div class="div"></div>
+    <div class="ft-jai">जय श्री राम 🙏</div>
+    <div class="ft-end">॥ इति श्रीहनुमान चालीसा सम्पूर्ण ॥</div>
+  </div>
+</div>
+
+<!-- AUTO-SCROLL WIDGET -->
+<div class="scroller hidden" id="scroller">
+  <button class="scroller-btn" id="scrollBtn" onclick="toggleScroll()" title="Play / Pause">▶</button>
+  <div class="scroller-speed">
+    <input type="range" id="speedRange" min="1" max="16" value="4" step="1" oninput="updateSpeed(this.value)">
+  </div>
+  <div class="speed-val" id="speedVal">1×</div>
+</div>
+
+<script>
+// === IMAGE LOADER ===
+const slots = {
+  1: ['https://i.imgur.com/KQCDDXr.png','https://i.imgur.com/KQCDDXr.jpg','https://i.imgur.com/KQCDDXr.jpeg','https://i.imgur.com/KQCDDXr.webp'],
+  2: ['https://i.imgur.com/Sg88YK3.png','https://i.imgur.com/Sg88YK3.jpg','https://i.imgur.com/Sg88YK3.jpeg','https://i.imgur.com/Sg88YK3.webp'],
+  3: ['https://i.imgur.com/AH2ucno.png','https://i.imgur.com/AH2ucno.jpg','https://i.imgur.com/AH2ucno.jpeg','https://i.imgur.com/AH2ucno.webp']
+};
+Object.entries(slots).forEach(([slot, urls]) => {
+  let done = false;
+  urls.forEach(url => {
+    const img = new Image();
+    img.onload = () => {
+      if (done) return; done = true;
+      document.querySelectorAll(`[data-slot="${slot}"]`).forEach(el => { el.src = url; });
+    };
+    img.src = url;
+  });
+});
+
+// === AUTO-SCROLL ===
+const speeds = [0.25,0.5,0.75,1,1.25,1.5,1.75,2,2.25,2.5,2.75,3,3.25,3.5,3.75,4];
+let scrolling = false, speed = speeds[3], raf = null, hideTimer = null;
+const scr = document.getElementById('scroller');
+
+function showWidget() {
+  scr.classList.remove('hidden');
+  clearTimeout(hideTimer);
+  if (!scrolling) hideTimer = setTimeout(() => { if (!scrolling) scr.classList.add('hidden'); }, 3000);
+}
+function toggleScroll() {
+  scrolling = !scrolling;
+  const btn = document.getElementById('scrollBtn');
+  btn.textContent = scrolling ? '⏸' : '▶';
+  btn.classList.toggle('active', scrolling);
+  clearTimeout(hideTimer);
+  if (scrolling) { doScroll(); scr.classList.remove('hidden'); }
+  else hideTimer = setTimeout(() => scr.classList.add('hidden'), 3000);
+}
+function doScroll() {
+  if (!scrolling) return;
+  window.scrollBy(0, speed * 0.4);
+  const h = document.documentElement;
+  if (h.scrollTop + h.clientHeight >= h.scrollHeight - 2) {
+    scrolling = false;
+    document.getElementById('scrollBtn').textContent = '▶';
+    document.getElementById('scrollBtn').classList.remove('active');
+    hideTimer = setTimeout(() => scr.classList.add('hidden'), 3000);
+    return;
+  }
+  raf = requestAnimationFrame(doScroll);
+}
+function updateSpeed(v) {
+  const idx = parseInt(v) - 1;
+  speed = speeds[idx];
+  document.getElementById('speedVal').textContent = speed + '×';
+  showWidget();
+}
+// Show on any scroll/touch, auto-hide after 3s idle
+['scroll','mousemove','touchstart'].forEach(e => window.addEventListener(e, showWidget, {passive:true}));
+
+// === CHAUPAIS ===
+const ch=[
+"जय हनुमान ज्ञान गुन सागर।\nजय कपीस तिहुँ लोक उजागर॥",
+"राम दूत अतुलित बल धामा।\nअंजनि-पुत्र पवनसुत नामा॥",
+"महावीर विक्रम बजरंगी।\nकुमति निवार सुमति के संगी॥",
+"कंचन बरन बिराज सुबेसा।\nकानन कुंडल कुँचित केसा॥",
+"हाथ बज्र औ ध्वजा बिराजै।\nकाँधे मूँज जनेऊ साजै॥",
+"शंकर सुवन केसरीनंदन।\nतेज प्रताप महा जग बंदन॥",
+"विद्यावान गुणी अति चातुर।\nराम काज करिबे को आतुर॥",
+"प्रभु चरित्र सुनिबे को रसिया।\nराम लखन सीता मन बसिया॥",
+"सूक्ष्म रूप धरि सियहिं दिखावा।\nबिकट रूप धरि लंक जरावा॥",
+"भीम रूप धरि असुर सँहारे।\nरामचंद्र के काज सँवारे॥",
+"लाय सजीवन लखन जियाये।\nश्रीरघुबीर हरषि उर लाये॥",
+"रघुपति कीन्हीं बहुत बड़ाई।\nतुम मम प्रिय भरतहि सम भाई॥",
+"सहस बदन तुम्हरो जस गावैं।\nअस कहि श्रीपति कंठ लगावैं॥",
+"सनकादिक ब्रह्मादि मुनीसा।\nनारद सारद सहित अहीसा॥",
+"जम कुबेर दिगपाल जहाँ ते।\nकबि कोबिद कहि सके कहाँ ते॥",
+"तुम उपकार सुग्रीवहिं कीन्हा।\nराम मिलाय राज पद दीन्हा॥",
+"तुम्हरो मंत्र विभीषन माना।\nलंकेश्वर भए सब जग जाना॥",
+"जुग सहस्र जोजन पर भानु।\nलील्यो ताहि मधुर फल जानू॥",
+"प्रभु मुद्रिका मेलि मुख माहीं।\nजलधि लाँघि गये अचरज नाहीं॥",
+"दुर्गम काज जगत के जेते।\nसुगम अनुग्रह तुम्हरे तेते॥",
+"राम दुआरे तुम रखवारे।\nहोत न आज्ञा बिनु पैसारे॥",
+"सब सुख लहैं तुम्हारी सरना।\nतुम रक्षक काहू को डरना॥",
+"आपन तेज सम्हारो आपै।\nतीनों लोक हाँक तें काँपै॥",
+"भूत पिसाच निकट नहिं आवै।\nमहाबीर जब नाम सुनावै॥",
+"नासै रोग हरै सब पीरा।\nजपत निरंतर हनुमत बीरा॥",
+"संकट तें हनुमान छुडावै।\nमन क्रम बचन ध्यान जो लावै॥",
+"सब पर राम तपस्वी राजा।\nतिन के काज सकल तुम साजा॥",
+"और मनोरथ जो कोई लावै।\nसोइ अमित जीवन फल पावै॥",
+"चारों जुग परताप तुम्हारा।\nहै परसिद्ध जगत उजियारा॥",
+"साधु-संत के तुम रखवारे।\nअसुर निकंदन राम दुलारे॥",
+"अष्ट सिद्धि नौ निधि के दाता।\nअस बर दीन जानकी माता॥",
+"राम रसायन तुम्हरे पासा।\nसदा रहो रघुपति के दासा॥",
+"तुम्हरे भजन राम को पावै।\nजनम-जनम के दुख बिसरावै॥",
+"अन्तकाल रघुबर पुर जाई।\nजहाँ जन्म हरि-भक्त कहाई॥",
+"और देवता चित्त न धरई।\nहनुमत सेइ सर्ब सुख करई॥",
+"संकट कटै मिटै सब पीरा।\nजो सुमिरै हनुमत बलबीरा॥",
+"जै जै जै हनुमान गोसाईं।\nकृपा करहु गुरुदेव की नाईं॥",
+"जो सत बार पाठ कर कोई।\nछूटहि बंदि महा सुख होई॥",
+"जो यह पढ़ै हनुमान चालीसा।\nहोय सिद्धि साखी गौरीसा॥",
+"तुलसीदास सदा हरि चेरा।\nकीजै नाथ हृदय महँ डेरा॥"
+];
+function render(a,id,s){
+  const c=document.getElementById(id);
+  a.forEach((t,i)=>{
+    const d=document.createElement('div');d.className='ch';
+    d.innerHTML=`<span class="ch-n">${String(s+i).padStart(2,'0')}</span><div class="v">${t.replace(/\n/g,'<br>')}</div>`;
+    c.appendChild(d);
+  });
+}
+render(ch.slice(0,20),'c1',1);
+render(ch.slice(20,35),'c2',21);
+render(ch.slice(35),'c3',36);
+
+// === PROGRESS BAR ===
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  document.getElementById('prog').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%';
+});
+
+// === FADE IN ===
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting){x.target.style.opacity='1';x.target.style.transform='translateY(0)'}});
+},{threshold:.1});
+document.querySelectorAll('.ch,.doha,.img-card,.circle-img').forEach(el=>{
+  el.style.opacity='0';el.style.transform='translateY(20px)';
+  el.style.transition='opacity .6s ease,transform .6s ease';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
