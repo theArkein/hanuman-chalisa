@@ -65,3 +65,8 @@ Everything lives in `index.html` (HTML + CSS + JS all inline, single file).
 - CSS custom properties: `--fs-v` (verse font size, default 22px), `--fs-meaning` (meaning font size, default 13px)
 - Animated blurred orbs + SVG crosshatch pattern as background atmosphere
 - Mobile breakpoint at 600px
+
+## Reference
+
+- `.claude/tasks.md` — in-progress tasks and their current status
+- `.claude/checklists.md` — checklists for recurring operations (e.g. domain change)
