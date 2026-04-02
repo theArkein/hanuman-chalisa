@@ -8,11 +8,11 @@ A clean, devotional single-page website for reading the Hanuman Chalisa (40 chau
 
 ## Development
 
-Pure static site — no build step, no dependencies. Open directly in a browser or serve locally:
+Pure static site — no build step, no dependencies. Open directly in a browser or serve locally with live reload:
 
 ```bash
-python3 -m http.server 8000
-# open http://localhost:8000
+npx live-server --port=8000
+# open http://127.0.0.1:8000
 ```
 
 ## Architecture

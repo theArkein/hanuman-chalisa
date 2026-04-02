@@ -12,8 +12,11 @@ A clean, beautiful, and simple single-page website for reading the Hanuman Chali
 
 ## Run locally
 
+With live reload (auto-refreshes on save):
+
 ```bash
-python3 -m http.server 8000
+npx live-server --port=8000
+# open http://127.0.0.1:8000
 ```
 
 Then open [http://localhost:8000](http://localhost:8000).
